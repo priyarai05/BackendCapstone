@@ -14,6 +14,6 @@ router.get("/", (req, res) => {
 
 router.post("/create", verifyAuth, createJob);
 router.get("/all", getAllJob);
-router.get("/view/:id", getJobById);
+router.get("/view/:jobnumber", getJobById);
 router.patch("/update/:jobnumber", verifyAuth, updateJob);
 module.exports = router;

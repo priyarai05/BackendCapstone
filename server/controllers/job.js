@@ -48,7 +48,14 @@ const createJob = async (req, res, next) => {
 const getAllJob = async (req, res, next) => {
   try {
     const jobs = await Job.find()
-      .select(["title", "companyName", "location", "skills"])
+      .select([
+        "title",
+        "salary",
+        "location",
+        "skills",
+        "jobType",
+        "locationType",
+      ])
       .sort({ createdAt: -1 });
     // .populate("refUserId")
     // .populate("skills")
@@ -61,8 +68,8 @@ const getAllJob = async (req, res, next) => {
 
 const getJobById = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const job = await Job.findById(id);
+    const { jobnumber } = req.params;
+    const job = await Job.findById(jobnumber);
     if (!job) {
       res.status(404).send("Job not found!");
     }

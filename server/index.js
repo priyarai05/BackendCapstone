@@ -5,6 +5,8 @@ const port = process.env.PORT || 3000;
 const fs = require("fs");
 const path = require("path");
 const mongoose = require("mongoose");
+const cors = require("cors");
+
 const logStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
   flags: "a",
 });
@@ -15,6 +17,11 @@ const errorStream = fs.createWriteStream(path.join(__dirname, "error.txt"), {
 const authRoutes = require("./routes/auth");
 const jobRoutes = require("./routes/job");
 
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
