@@ -29,7 +29,7 @@ function Job() {
   return (
     <div>
       <h1>Jobs</h1>
-      <input type="text" placeholder='search by skills (separate by comma)' />
+      <input type="text" value={skills} onChange={() => setSkills(e.target.value)} placeholder='search by skills (separate by comma)' />
       <button style={{
                 padding: '5px 10px',
                 backgroundColor: '#ED5353',
