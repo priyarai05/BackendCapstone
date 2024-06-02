@@ -1,9 +1,12 @@
 import axios from "axios";
 import { BACKEND_URL } from "../constants";
 
-export const getAllJobs = async () => {
+export const getAllJobs = async ({ skills }) => {
   try {
-    const response = await axios.get(`${BACKEND_URL}/api/job/all`);
+    const response = await axios.get(
+      `${BACKEND_URL}/api/job/all?skills=${skills}`
+    );
+
     return response;
   } catch (error) {
     return error;

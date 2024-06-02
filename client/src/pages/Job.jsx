@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 function Job() {
   const [jobs, setJobs] = useState([])
+  const [skills, setSkills] = useState("")
   useEffect(() => {
     getAllJobs().then((response) => {
       setJobs(response.data)
@@ -17,9 +18,27 @@ function Job() {
   const gotoJobDetails = (id) =>{
     navigate(`/jobs/${id}`)
   }
+  const triggerSearch = () => {
+    getAllJobs({ skills }).then((response) => {
+      setJobs(response.data)
+    }).catch((error) => {
+      console.log(error)
+      setJobs([])
+    })
+  }
   return (
     <div>
       <h1>Jobs</h1>
+      <input type="text" placeholder='search by skills (separate by comma)' />
+      <button style={{
+                padding: '5px 10px',
+                backgroundColor: '#ED5353',
+                color: 'white',
+                cursor: 'pointer',
+                marginTop: '5px',
+                border: 'none',
+                borderRadius: '5px'
+              }} onClick={triggerSearch}>Search</button>
       {localStorage.getItem("token") && <button style={{
                 padding: '5px 10px',
                 backgroundColor: '#ED5353',
