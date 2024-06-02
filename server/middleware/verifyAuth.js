@@ -1,4 +1,6 @@
 const jwt = require("jsonwebtoken");
+const env = require("dotenv");
+env.config();
 
 const verifyAuth = (req, res, next) => {
   try {
@@ -7,7 +9,7 @@ const verifyAuth = (req, res, next) => {
       return res.status(401).json({ message: "Authorization denied" });
     }
     //move secret to env
-    const decode = jwt.verify(token, "secret");
+    const decode = jwt.verify(token, process.env.JWT_SECRET);
     req.userId = decode.userId;
     next();
   } catch (error) {

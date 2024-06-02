@@ -6,6 +6,8 @@ const fs = require("fs");
 const path = require("path");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const env = require("dotenv");
+env.config();
 
 const logStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
   flags: "a",
@@ -58,9 +60,7 @@ app.use((req, res, next) => {
 });
 
 mongoose
-  .connect(
-    "mongodb+srv://priya:priya123@cluster0.6gmuwlg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("Connected to DB"))
   .catch((err) => console.log(err));
 

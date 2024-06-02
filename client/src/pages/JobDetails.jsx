@@ -24,6 +24,7 @@ function JobDetails() {
     <div>
         {jobDetails && (<div>
             <h1>{jobDetails.title}</h1>
+            <h2>{jobDetails.companyName}</h2>
             <p>{jobDetails.location}</p>
             <p>{jobDetails.locationType}</p>
             <p>{jobDetails.description}</p>

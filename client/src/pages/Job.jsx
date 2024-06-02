@@ -20,6 +20,15 @@ function Job() {
   return (
     <div>
       <h1>Jobs</h1>
+      {localStorage.getItem("token") && <button style={{
+                padding: '5px 10px',
+                backgroundColor: '#ED5353',
+                color: 'white',
+                cursor: 'pointer',
+                marginTop: '5px',
+                border: 'none',
+                borderRadius: '5px'
+              }} onClick={() => navigate("/create-job")}>+ Add Job</button>}
       <ul>
         {
           jobs.map((job) => (
@@ -41,6 +50,15 @@ function Job() {
                 border: 'none',
                 borderRadius: '5px'
               }} onClick={() => gotoJobDetails(job._id)}>View Details</button>
+              {localStorage.getItem("token") && <button style={{
+                padding: '5px 10px',
+                borderBlock: '1px solid #ED5353',
+                color: '#ED5353',
+                cursor: 'pointer',
+                marginTop: '5px',
+                marginLeft: '5px',
+                borderRadius: '5px'
+              }} onClick={() => navigate(`/edit/${job._id}`)}>Edit Job</button>}
             </li>
           ))
         }

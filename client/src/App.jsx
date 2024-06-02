@@ -3,6 +3,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Job from './pages/Job'
 import JobDetails from './pages/JobDetails'
+import CreateJob from './pages/CreateJob'
 
 function App() {
 
@@ -14,6 +15,8 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/jobs' element={<Job />} />
         <Route path='/jobs/:id' element={<JobDetails />} />
+        <Route path='/create-job' element={<CreateJob />} />
+        <Route path='/edit/:id' element={<CreateJob />} />
       </Routes>
     </BrowserRouter>
   )
