@@ -1,8 +1,9 @@
 import axios from "axios";
+import { BACKEND_URL } from "../constants";
 
 export const getAllJobs = async () => {
   try {
-    const response = await axios.get("http://localhost:3000/api/job/all");
+    const response = await axios.get(`${BACKEND_URL}/api/job/all`);
     return response;
   } catch (error) {
     return error;
@@ -12,7 +13,7 @@ export const getAllJobs = async () => {
 export const getJobById = async (jobnumber) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/api/job/view/${jobnumber}`
+      `${BACKEND_URL}/api/job/view/${jobnumber}`
     );
     return response;
   } catch (error) {
@@ -23,7 +24,7 @@ export const getJobById = async (jobnumber) => {
 export const createJob = async (jobData) => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/api/job/create",
+      `${BACKEND_URL}/api/job/create`,
       jobData,
       {
         headers: {
@@ -41,7 +42,7 @@ export const createJob = async (jobData) => {
 export const updateJob = async (jobnumber, jobData) => {
   try {
     const response = await axios.patch(
-      `http://localhost:3000/api/job/update/${jobnumber}`,
+      `${BACKEND_URL}/api/job/update/${jobnumber}`,
       jobData,
       {
         headers: {

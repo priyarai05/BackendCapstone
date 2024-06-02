@@ -54,6 +54,7 @@ const getAllJob = async (req, res, next) => {
       const jobs = await Job.find()
         .select([
           "title",
+          "companyName",
           "salary",
           "location",
           "skills",
@@ -66,6 +67,7 @@ const getAllJob = async (req, res, next) => {
       const jobs = await Job.find({ skills: { $in: skillsArray } })
         .select([
           "title",
+          "companyName",
           "salary",
           "location",
           "skills",

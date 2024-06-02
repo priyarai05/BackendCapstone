@@ -34,6 +34,7 @@ function Job() {
           jobs.map((job) => (
             <li key={job._id}>
               <h1>{job.title}</h1>
+              <h2>{job.companyName}</h2>
               <div><span>{job.salary}</span>&nbsp;<span>{job.location}</span></div>
               <div>{job.skills.map((skill, idx) => 
               (
