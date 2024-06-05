@@ -9,8 +9,17 @@ const jobSchema = new Schema({
     type: String,
     required: true,
   },
+  companyLogo: {
+    type: String,
+    required: true,
+  },
+  aboutCompany: {
+    type: String,
+    required: true,
+  },
   location: {
     type: String,
+    required: true,
   },
   salary: {
     type: Number,
@@ -30,6 +39,9 @@ const jobSchema = new Schema({
   skills: {
     type: [String],
     required: true,
+  },
+  information: {
+    type: String,
   },
   refUserId: {
     type: Schema.Types.ObjectId,

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { register } from '../services/auth'
+import './Register.scss'
 
 function Register() {
     const [data, setData] = useState({
@@ -21,26 +22,32 @@ function Register() {
     }
     
   return (
-    <>
-        <h1>Create an account</h1>
-        <form style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-            width: '300px',
-            margin: 'auto'
-        }} onSubmit={registerUser}>
+    <div className='container'>
+        <div className="left">
+            <div className="loginForm">
+            <h1>Create an account</h1>
+            <p>Your personal job finder is here</p>
+            <form onSubmit={registerUser}>
             <input type="text" name='name' onChange={handleChange} placeholder='Name' />
             <input type='email' name='email' onChange={handleChange} placeholder='Email' />
             <input type='tel' name='mobile' onChange={handleChange} placeholder='Mobile' />
             <input type='password' name='password' onChange={handleChange} placeholder='Password' />
             <div>
             <input type='checkBox' id='checkbox' name='checkbox' />
-            <label htmlFor="checkbox">By creating an account, I agree to our terms of use and privacy policy</label>
+            <label htmlFor="checkbox"> By creating an account, I agree to our terms of use and privacy policy</label>
             </div>
-            <button type='submit'>Create Account</button>
+            <div>
+                <button type='submit'>Create Account</button>
+                <p>Already have an account? <span onClick={() => navigate('/login')}>Sign In</span></p>
+            </div>
+            
         </form>
-    </>
+        </div>
+        </div>
+        <div className="right">
+            <img src="register.png" alt="" />
+        </div>    
+    </div>
   )
 }
 

@@ -1,5 +1,7 @@
 import {useState, useEffect} from 'react'
 import { getJobById } from '../services/jobs'
+import Navbar from './navbar/Navbar'
+import './JobDetails.scss'
 
 function JobDetails() {
     const url = new URL(window.location.href)
@@ -21,16 +23,29 @@ function JobDetails() {
   }, [id])
   console.log(jobDetails)
   return (
-    <div>
-        {jobDetails && (<div>
+    <div className='detailsPage'>
+      <Navbar />
+        {jobDetails && (
+        <div className='content'>
+          <div className='title'>
+            <h2>{jobDetails.title} {jobDetails.locationType} {jobDetails.jobType} at {jobDetails.companyName}</h2>
+          </div>
+
+          <div className='details'>
+            <p>{jobDetails.jobType}</p>
             <h1>{jobDetails.title}</h1>
-            <h2>{jobDetails.companyName}</h2>
-            <p>{jobDetails.location}</p>
-            <p>{jobDetails.locationType}</p>
+            <p style={{color:'#ED5353'}}>{jobDetails.location}</p>
+            <h3>About Company</h3>
+            <p>{jobDetails.aboutCompany}</p>
+            <h3>About the job/internship</h3>
             <p>{jobDetails.description}</p>
-            <ul>{jobDetails.skills.map((skill, idx) => (
-                <li key={idx}>{skill}</li>
+            <h3>Skill(s) required</h3>
+            <ul className='skills'>{jobDetails.skills.map((skill, idx) => (
+                <li className='skill' key={idx}>{skill}</li>
             ))}</ul>
+            <h3>Information</h3>
+            <p>{jobDetails.information}</p>
+          </div>
         </div>)}
         {jobDetails === null && (<h1>Job not found</h1>)}
     </div>

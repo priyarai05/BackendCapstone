@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react'
 import { getAllJobs } from '../services/jobs'
 import { useNavigate } from 'react-router-dom'
+import Navbar from './navbar/Navbar'
+import './Job.scss'
 
 function Job() {
   const [jobs, setJobs] = useState([])
@@ -28,58 +30,43 @@ function Job() {
   }
   return (
     <div>
-      <h1>Jobs</h1>
+      <Navbar />
+      <div className='searchBox'>
       <input type="text" value={skills} onChange={(e) => setSkills(e.target.value)} placeholder='search by skills (separate by comma)' />
-      <button style={{
-                padding: '5px 10px',
-                backgroundColor: '#ED5353',
-                color: 'white',
-                cursor: 'pointer',
-                marginTop: '5px',
-                border: 'none',
-                borderRadius: '5px'
-              }} onClick={triggerSearch}>Search</button>
-      {localStorage.getItem("token") && <button style={{
-                padding: '5px 10px',
-                backgroundColor: '#ED5353',
-                color: 'white',
-                cursor: 'pointer',
-                marginTop: '5px',
-                border: 'none',
-                borderRadius: '5px'
-              }} onClick={() => navigate("/create-job")}>+ Add Job</button>}
-      <ul>
+      
+      {localStorage.getItem("token") ? 
+      <div className='filter'>
+        <button style={{border: 'none'}} className='inactive' onClick={triggerSearch}>Clear</button>
+      <button onClick={() => navigate("/create-job")}>+ Add Job</button>
+      </div>
+              :
+              <div className='filter'>
+              <button onClick={triggerSearch}>Apply Filter</button>
+              <button style={{border: 'none'}} className='inactive' onClick={triggerSearch}>Clear</button>
+              </div>
+      }
+      </div>
+      <ul className='jobList'>
         {
           jobs.map((job) => (
-            <li key={job._id}>
-              <h1>{job.title}</h1>
-              <h2>{job.companyName}</h2>
-              <div><span>{job.salary}</span>&nbsp;<span>{job.location}</span></div>
-              <div>{job.skills.map((skill, idx) => 
-              (
-                  <li key={idx}>{skill}</li>
-              ))}</div>
-              {/* <p>{job.skills.join(", ")}</p> */}
-              <div><span>{job.locationType}</span>&nbsp;<span>{job.jobType}</span></div>
-              <button style={{
-                padding: '5px 10px',
-                backgroundColor: '#ED5353',
-                color: 'white',
-                cursor: 'pointer',
-                marginTop: '5px',
-                border: 'none',
-                borderRadius: '5px'
-              }} onClick={() => gotoJobDetails(job._id)}>View Details</button>
-              {localStorage.getItem("token") && <button style={{
-                padding: '5px 10px',
-                borderBlock: '1px solid #ED5353',
-                color: '#ED5353',
-                cursor: 'pointer',
-                marginTop: '5px',
-                marginLeft: '5px',
-                borderRadius: '5px'
-              }} onClick={() => navigate(`/edit/${job._id}`)}>Edit Job</button>}
-            </li>
+            <li key={job._id} className='singleJob'>
+              <div className="left">
+                <img src={job.companyLogo} alt="logo" />
+                <h2>{job.title}</h2>
+                <div><span>{job.salary}</span>&nbsp;<span>{job.location}</span></div>
+                <div className='locationType'><span>{job.locationType}</span>&nbsp;<span>{job.jobType}</span></div>
+              </div>
+              
+              <div className='right'>
+                <div className='skills'>{job.skills.map((skill, idx) => 
+                (
+                    <li className='skill' key={idx}>{skill}</li>
+                ))}</div>
+                {/* <p>{job.skills.join(", ")}</p> */}
+                <button onClick={() => gotoJobDetails(job._id)}>View Details</button>
+                {localStorage.getItem("token") && <button className='inactive' onClick={() => navigate(`/edit/${job._id}`)}>Edit Job</button>}
+              </div>
+            </li>  
           ))
         }
       </ul>

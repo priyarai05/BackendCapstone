@@ -11,12 +11,15 @@ function CreateJob() {
     const [data, setData] = useState({
       title: '',
       companyName: '',
+      companyLogo: '',
+      aboutCompany: '',
       location: '',
       description: '',
       salary: '',
       locationType: '',
       jobType: '',
-      skills: ''
+      skills: '',
+      information: ''
     })
 
     const handleChange = (e) => {
@@ -73,12 +76,35 @@ function CreateJob() {
             <input type="text" id='companyName' name='companyName' onChange={handleChange} value={data.companyName} placeholder='Enter your company name here' />
             </div>
             <div>
+            <label htmlFor="companyLogo">Add Logo URL</label>
+            <input type="text" id='companyLogo' name='companyLogo' onChange={handleChange} value={data.companyLogo} placeholder='Enter the link' />
+            </div>
+            <div>
             <label htmlFor="title">Job Position</label>
             <input type="text" id='title' name='title' onChange={handleChange} value={data.title} placeholder='Enter job position' />
             </div>
             <div>
             <label htmlFor="salary">Monthly Salary</label>
             <input type="number" id='salary' name='salary' onChange={handleChange} value={data.salary} placeholder='Enter amount in rupees' />
+            </div>
+            <div>
+              <label htmlFor="jobType">Job Type</label>
+            <select name="jobType" id="jobType" onChange={handleChange} value={data.jobType} placeholder='Select'>
+                <option value={""}>Select</option>
+                <option value="fulltime">Full Time</option>
+                <option value="parttime">Part Time</option>
+                <option value="contract">Contract</option>
+                <option value="internship">Internship</option>
+            </select>
+            </div>
+            <div>
+              <label htmlFor="locationType">Remote/office</label>
+              <select name="locationType" id="locationType" onChange={handleChange} value={data.locationType} placeholder='Select'>
+                  <option value={""}>Select</option>
+                  <option value="remote">Remote</option>
+                  <option value="hybrid">Hybrid</option>
+                  <option value="office">Office</option>
+              </select>
             </div>
             <div>
             <label htmlFor="location">Location</label>
@@ -88,27 +114,21 @@ function CreateJob() {
             <label htmlFor="description">Job Description</label>
             <textarea name="description" id="description" onChange={handleChange} value={data.description} placeholder='Type the job description'></textarea>
             </div>
-            <select name="locationType" id="locationType" onChange={handleChange} value={data.locationType} placeholder='Select'>
-                <option value={""}>Select</option>
-                <option value="remote">Remote</option>
-                <option value="hybrid">Hybrid</option>
-                <option value="onsite">Onsite</option>
-            </select>
-            <select name="jobType" id="jobType" onChange={handleChange} value={data.jobType} placeholder='Select'>
-                <option value={""}>Select</option>
-                <option value="fulltime">Full Time</option>
-                <option value="parttime">Part Time</option>
-                <option value="contract">Contract</option>
-                <option value="internship">Internship</option>
-            </select>
+            <div>
+              <label htmlFor="aboutCompany">About Company</label>
+              <textarea name="aboutCompany" id="aboutCompany" onChange={handleChange} value={data.aboutCompany} placeholder='Type about your company'></textarea>
+            </div>
             <div>
             <label htmlFor="skills">Skills</label>
             <input type="text" name='skills' id='skills' onChange={handleChange} value={data.skills} placeholder='Add skills and separate it by comma' />
-            {data.skills.split(',').map((skill, idx) => (
+            {/* {data.skills.split(',').map((skill, idx) => (
               <span key={idx}>{skill}</span>
-            ))}
+            ))} */}
             </div>
-            
+            <div>
+            <label htmlFor="information">Information</label>
+            <input type="text" id='information' name='information' onChange={handleChange} value={data.information} placeholder='Enter the additional information' />
+            </div>
             {isEdit ? <button type="submit">Update Job</button> : <button type="submit">+ Add Job</button>}
         </form>
     </>

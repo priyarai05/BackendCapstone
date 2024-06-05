@@ -5,16 +5,20 @@ const createJob = async (req, res, next) => {
     const {
       title,
       companyName,
+      companyLogo,
+      aboutCompany,
       location,
       salary,
       description,
       locationType,
       jobType,
       skills,
+      information,
     } = req.body;
     if (
       !title ||
       !companyName ||
+      !aboutCompany ||
       !location ||
       !salary ||
       !description ||
@@ -28,12 +32,15 @@ const createJob = async (req, res, next) => {
     const newJob = new Job({
       title,
       companyName,
+      companyLogo,
+      aboutCompany,
       location,
       salary,
       description,
       locationType,
       jobType,
       skills: skillsArray,
+      information,
       refUserId: req.userId,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -55,11 +62,14 @@ const getAllJob = async (req, res, next) => {
         .select([
           "title",
           "companyName",
+          "companyLogo",
+          "aboutCompany",
           "salary",
           "location",
           "skills",
           "jobType",
           "locationType",
+          "information",
         ])
         .sort({ createdAt: -1 });
       res.status(200).json(jobs);
@@ -68,11 +78,14 @@ const getAllJob = async (req, res, next) => {
         .select([
           "title",
           "companyName",
+          "companyLogo",
+          "aboutCompany",
           "salary",
           "location",
           "skills",
           "jobType",
           "locationType",
+          "information",
         ])
         .sort({ createdAt: -1 });
       res.status(200).json(jobs);
@@ -108,12 +121,15 @@ const updateJob = async (req, res, next) => {
       {
         title: req.body.title || job.title,
         companyName: req.body.companyName || job.companyName,
+        companyLogo: req.body.companyLogo || job.companyLogo,
+        aboutCompany: req.body.aboutCompany || job.aboutCompany,
         location: req.body.location || job.location,
         salary: req.body.salary || job.salary,
         description: req.body.description || job.description,
         locationType: req.body.locationType || job.locationType,
         jobType: req.body.jobType || job.jobType,
         skills: skillsArray || job.skills,
+        information: req.body.information || job.information,
         updatedAt: new Date(),
         createdAt: job.createdAt,
       },
