@@ -7,6 +7,7 @@ import './Job.scss'
 function Job() {
   const [jobs, setJobs] = useState([])
   const [skills, setSkills] = useState("")
+  const [filteredSkills, setFilteredSkills] = useState(false)
   useEffect(() => {
     getAllJobs({ skills: ""}).then((response) => {
       setJobs(response.data)
@@ -23,6 +24,7 @@ function Job() {
   const triggerSearch = () => {
     getAllJobs({ skills }).then((response) => {
       setJobs(response.data)
+      setFilteredSkills(true)
     }).catch((error) => {
       console.log(error)
       setJobs([])
@@ -33,7 +35,11 @@ function Job() {
       <Navbar />
       <div className='searchBox'>
       <input type="text" value={skills} onChange={(e) => setSkills(e.target.value)} placeholder='search by skills (separate by comma)' />
-      
+      {filteredSkills && (<div className='skills'>
+        {skills.map((skill) => {
+          return <span className='skill' key={skill}>{skill} <span>X</span></span>
+        })}
+      </div>)}
       {localStorage.getItem("token") ? 
       <div className='filter'>
         <button style={{border: 'none'}} className='inactive' onClick={triggerSearch}>Clear</button>
