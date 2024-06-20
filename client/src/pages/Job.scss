@@ -20,13 +20,35 @@
         right: 2rem;
         bottom: 1rem;
     }
+    .skills{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        span{
+            .skill{
+                // width: 6rem;
+                text-transform: capitalize;
+                text-align: center;
+                padding: 5px 10px;
+                background-color: #FFEEEE;
+            }
+            span{
+                text-align: center;
+                padding: 5px 10px;
+                background-color: #FF6B6B;
+            }
+        }
+        
+    }
 }
 
 .jobList{
-    // overflow-y: scroll;
+    height: calc(100vh - 300px);
+    overflow: scroll;
 
     .singleJob{
-        list-style: none;
+        // list-style: none;
         display: flex;
         margin: 2rem 5rem;
         padding: 2rem;
@@ -97,7 +119,7 @@ button{
 } */
 
 ::-webkit-scrollbar-thumb {
-    background: #FFE6A6;
+    background: #ffffff;
     border-radius: 10px;
 }
 

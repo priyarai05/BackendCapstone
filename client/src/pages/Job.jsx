@@ -25,6 +25,7 @@ function Job() {
     getAllJobs({ skills }).then((response) => {
       setJobs(response.data)
       setFilteredSkills(true)
+      console.log(skills)
     }).catch((error) => {
       console.log(error)
       setJobs([])
@@ -36,12 +37,13 @@ function Job() {
       <div className='searchBox'>
       <input type="text" value={skills} onChange={(e) => setSkills(e.target.value)} placeholder='search by skills (separate by comma)' />
       {filteredSkills && (<div className='skills'>
-        {skills.map((skill) => {
-          return <span className='skill' key={skill}>{skill} <span>X</span></span>
+        {skills.split(',').map((skill) => {
+          return <span><span key={skill} className='skill'>{skill}</span><span>X</span></span>
         })}
       </div>)}
       {localStorage.getItem("token") ? 
       <div className='filter'>
+        <button onClick={triggerSearch}>Apply Filter</button>
         <button style={{border: 'none'}} className='inactive' onClick={triggerSearch}>Clear</button>
       <button onClick={() => navigate("/create-job")}>+ Add Job</button>
       </div>

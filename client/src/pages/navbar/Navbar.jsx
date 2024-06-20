@@ -16,6 +16,10 @@ function Navbar() {
     //     console.log(err)
     //   })
     // }, [])
+    const logout = () => {
+      localStorage.clear();
+      window.location.href = '/jobs';
+    }
     
   return (
     <nav>
@@ -25,7 +29,7 @@ function Navbar() {
         </div>
         {localStorage.getItem("token") ? 
          <div className='buttons'>
-            <button style={{background: 'none'}} onClick={() => {}}>Logout</button>
+            <button style={{background: 'none'}} onClick={logout}>Logout</button>
             <button style={{background: 'none'}}>Hello! Recruiter</button>
          </div>   
         :
